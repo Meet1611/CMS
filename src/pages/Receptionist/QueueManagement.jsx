@@ -50,11 +50,10 @@ const QueueManagement = () => {
 
   const updateStatus = async (tokenId, newStatus) => {
     try {
-      // Assuming there's an endpoint to update status, e.g., PUT /queue/:id/status
-      // For now, updating local state to reflect UI change as per user image
-      // await api.put(`/queue/${tokenId}/status`, { status: newStatus });
+      await api.patch(`/queue/${tokenId}`, {status: newStatus});
+      // Check both id and appointmentId to be safe as user is mixing them
       setQueue(prev => prev.map(item => 
-        item.id === tokenId ? { ...item, status: newStatus } : item
+        (item.id === tokenId || item.appointmentId === tokenId) ? { ...item, status: newStatus } : item
       ));
     } catch (err) {
       console.error("Error updating status:", err);
@@ -62,13 +61,16 @@ const QueueManagement = () => {
   };
 
   const getStatusBadge = (status) => {
-    switch (status?.toLowerCase()) {
+    const s = status?.toLowerCase();
+    switch (s) {
       case "waiting":
         return <Badge variant="outline" className="bg-amber-50 text-amber-700 border-amber-200">waiting</Badge>;
+      case "in-progress":
       case "in_progress":
         return <Badge variant="outline" className="bg-emerald-50 text-emerald-700 border-emerald-200">in progress</Badge>;
+      case "done":
       case "completed":
-        return <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">completed</Badge>;
+        return <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">done</Badge>;
       case "skipped":
         return <Badge variant="outline" className="bg-zinc-100 text-zinc-600 border-zinc-200">skipped</Badge>;
       default:
@@ -137,21 +139,36 @@ const QueueManagement = () => {
                     <TableCell>{getStatusBadge(item.status)}</TableCell>
                     <TableCell className="pr-8 text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Button 
-                          onClick={() => updateStatus(item.id, "in_progress")}
-                          variant="solid"
-                          disabled={item.status === "in_progress"}
-                          className="rounded-xl border-zinc-200 h-9 font-bold text-zinc-600 hover:bg-zinc-50 active:scale-95"
-                        >
-                          <span>In progress</span>
-                        </Button>
-                        <Button 
-                          variant="outline"
-                          onClick={() => updateStatus(item.id, "skipped")}
-                          className="rounded-xl border-zinc-200 h-9 font-bold text-zinc-600 hover:bg-zinc-50 active:scale-95"
-                        >
-                          Skip
-                        </Button>
+                        {(item.status === "waiting") && (
+                          <>
+                            <Button 
+                              onClick={() => updateStatus(item.appointmentId, "in-progress")}
+                              className="rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white h-9 font-bold px-4 active:scale-95 transition-all"
+                            >
+                              In progress
+                            </Button>
+                            <Button 
+                              variant="outline"
+                              onClick={() => updateStatus(item.id, "skipped")}
+                              className="rounded-xl border-zinc-200 h-9 font-bold text-zinc-600 hover:bg-zinc-50 active:scale-95"
+                            >
+                              Skip
+                            </Button>
+                          </>
+                        )}
+                        
+                        {(item.status === "in-progress" || item.status === "in_progress") && (
+                          <Button 
+                            onClick={() => updateStatus(item.appointmentId || item.id, "done")}
+                            className="rounded-xl bg-teal-600 hover:bg-teal-700 text-white h-9 font-bold px-6 active:scale-95 transition-all shadow-sm"
+                          >
+                            Done
+                          </Button>
+                        )}
+
+                        {(item.status === "done" || item.status === "completed" || item.status === "skipped") && (
+                          <span className="text-xs font-bold text-zinc-400 italic">Finished</span>
+                        )}
                       </div>
                     </TableCell>
                   </TableRow>

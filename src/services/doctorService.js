@@ -13,10 +13,13 @@ export const doctorService = {
 
   addPrescription: async (appointmentId, prescriptionData) => {
     try {
-      const response = await api.post(`/prescriptions/${appointmentId}`, prescriptionData);
-      console.log(response);
+      console.log("Sending prescription data for appointment:", appointmentId, prescriptionData);
+      const response = await api.post(`/prescriptions/${parseInt(appointmentId)}`, prescriptionData);
       return response.data;
     } catch (error) {
+      if (error.response) {
+        console.error("Backend error details:", error.response.data);
+      }
       console.error("Error adding prescription:", error);
       throw error;
     }
@@ -24,9 +27,13 @@ export const doctorService = {
 
   addReport: async (appointmentId, reportData) => {
     try {
-      const response = await api.post(`/reports/${appointmentId}`, reportData);
+      console.log("Sending report data for appointment:", appointmentId, reportData);
+      const response = await api.post(`/reports/${parseInt(appointmentId)}`, reportData);
       return response.data;
     } catch (error) {
+      if (error.response) {
+        console.error("Backend error details:", error.response.data);
+      }
       console.error("Error adding medical report:", error);
       throw error;
     }

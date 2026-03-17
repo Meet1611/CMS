@@ -29,8 +29,8 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)}>
       <Card className={cn("border border-gray-200 shadow", className)}>
         <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription className={cn("text-slate-500")}>
+          <CardTitle className="text-2xl font-black tracking-tighter">CMS Login</CardTitle>
+          <CardDescription className={cn("text-slate-500 ")}>
             Enter your email below to login to your account
           </CardDescription>
         </CardHeader>

@@ -102,7 +102,9 @@ const DoctorQueue = () => {
                     </TableCell>
                     <TableCell>
                       <Badge variant="outline" className={`rounded-lg border-none px-3 py-1 font-bold lowercase ${
-                        item.status?.toLowerCase() === 'in_progress' ? 'bg-blue-100 text-blue-600' : 'bg-amber-100 text-amber-600'
+                        (item.status?.toLowerCase() === 'in_progress' || item.status?.toLowerCase() === 'in-progress') ? 'bg-blue-100 text-blue-600' : 
+                        (item.status?.toLowerCase() === 'done' || item.status?.toLowerCase() === 'completed') ? 'bg-green-100 text-green-600' :
+                        'bg-amber-100 text-amber-600'
                       }`}>
                         {item.status || "waiting"}
                       </Badge>

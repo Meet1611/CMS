@@ -52,15 +52,27 @@ const AddPrescription = () => {
     setError(null);
     setSuccess(false);
 
+    // Sanitize medicines: remove any empty rows
+    const sanitizedMedicines = medicines.filter(med => med.name.trim() !== "");
+
+    if (sanitizedMedicines.length === 0) {
+      setError("Please add at least one medicine.");
+      setLoading(false);
+      return;
+    }
+
     try {
-      await doctorService.addPrescription(appointmentId, {
-        medicines,
-        notes,
-      });
+      const payload = {
+        medicines: sanitizedMedicines,
+        notes: notes.trim()
+      };
+      console.log("Submitting prescription payload:", payload);
+      await doctorService.addPrescription(appointmentId, payload);
       setSuccess(true);
       setTimeout(() => navigate(-1), 2000);
     } catch (err) {
-      setError("Failed to save prescription. Check your connection.");
+      const errorMsg = err.response?.data?.error || err.response?.data?.message || "Failed to save prescription. Backend returned a validation error (400).";
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }

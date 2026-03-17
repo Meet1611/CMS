@@ -122,59 +122,7 @@ const Dashboard = () => {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1px bg-zinc-100 border border-zinc-100">
-              {/* {getDashboardCards().map((card, index) => (
-              <div 
-                key={index}
-                className="group bg-white p-8 hover:bg-zinc-50 transition-all cursor-pointer"
-              >
-                <div className="flex justify-between items-start mb-6">
-                  <h4 className="text-lg font-black tracking-tighter text-zinc-900">{card.title}</h4>
-                  <div className="w-2 h-2 rounded-full bg-zinc-200 group-hover:bg-zinc-900 transition-colors"></div>
-                </div>
-                <p className="text-[11px] font-bold text-zinc-400 tracking-wide mb-8 leading-relaxed">
-                  {card.desc}
-                </p>
-                <div className="flex items-center text-zinc-900 font-black text-[10px] tracking-widest">
-                  <span>{card.action}</span>
-                  <ChevronRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </div>
-            ))} */}
-            </div>
-          </div>
-
-          {/* Recent Activity Section */}
-          {/* <div className="space-y-6 text-left">
-          <h3 className="text-xs font-black tracking-[0.4em] text-zinc-300">
-            SYSTEM_LOGS
-          </h3>
-          <div className="space-y-px bg-zinc-100 border border-zinc-100">
-            {[1, 2].map((i) => (
-              <div
-                key={i}
-                className="flex items-center justify-between p-6 bg-white hover:bg-zinc-50 transition-colors"
-              >
-                <div className="flex items-center gap-6">
-                  <span className="text-[10px] tabular-nums font-black text-zinc-200">
-                    0{i}
-                  </span>
-                  <div>
-                    <p className="text-[11px] font-black text-zinc-900 tracking-wide">
-                      SYSTEM_UPDATE_STABLE
-                    </p>
-                    <p className="text-[9px] text-zinc-400 font-bold mt-1 tracking-widest">
-                      TS: 2026.03.17_10:45
-                    </p>
-                  </div>
-                </div>
-                <div className="text-[9px] font-black text-zinc-900 border border-zinc-100 px-2 py-1">
-                  OK_STATUS
-                </div>
-              </div>
-            ))}
-          </div>
-        </div> */}
+          </div>              
         </main>
       ) : (
         <div className="min-w-6xl mx-auto mt-8">

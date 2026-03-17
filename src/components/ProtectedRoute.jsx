@@ -11,7 +11,7 @@ const ProtectedRoute = ({ children, roles = [] }) => {
 
   // Not logged in
   if (!user) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/" replace />;
   }
 
   // Support both 'role' and 'UserRole' (some tokens use one or the other)
