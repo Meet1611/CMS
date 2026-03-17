@@ -10,6 +10,10 @@ import PrescriptionList from "./pages/Patient/PrescriptionList";
 import ReportList from "./pages/Patient/ReportList";
 import Appointment from "./pages/Patient/Appointment";
 import QueueManagement from "./pages/Receptionist/QueueManagement";
+import QueueDisplay from "./pages/Receptionist/QueueDisplay";
+import DoctorQueue from "./pages/Doctor/DoctorQueue";
+import AddPrescription from "./pages/Doctor/AddPrescription";
+import AddReport from "./pages/Doctor/AddReport";
 
 export default function AppRoutes() {
   return (
@@ -53,6 +57,7 @@ export default function AppRoutes() {
           }
         >
           <Route path="queue" element={<QueueManagement />} />
+          <Route path="display" element={<QueueDisplay />} />
         </Route>
 
         <Route
@@ -62,7 +67,11 @@ export default function AppRoutes() {
               <Dashboard />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route path="queue" element={<DoctorQueue />} />
+          <Route path="prescription" element={<AddPrescription />} />
+          <Route path="report" element={<AddReport />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

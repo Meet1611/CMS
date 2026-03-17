@@ -41,8 +41,15 @@ const Dashboard = () => {
       { label: "My Prescription", href: "/patient/prescription" },
       { label: "My Reports", href: "/patient/reports" },
     ],
-    doctor: [{ label: "My Appointments", href: "/doctor" }],
-    receptionist: [{ label: "Queue (manage)", href: "/receptionist/queue" }],
+    doctor: [
+      { label: "Today's Queue", href: "/doctor/queue" },
+      { label: "Add Prescription", href: "/doctor/prescription" },
+      { label: "Add Report", href: "/doctor/report" }
+    ],
+    receptionist: [
+      { label: "Queue (manage)", href: "/receptionist/queue" },
+      { label: "TV Display", href: "/receptionist/display" }
+    ],
   };
 
   return (
@@ -103,9 +110,6 @@ const Dashboard = () => {
                         ? "Receptionist"
                         : "Doctor"}
                 </h2>
-                <p className="text-xs text-zinc-400 font-bold tracking-widest max-w-md">
-                  ROLE: {user?.role || "UNDEFINED"} // SYSTEM_ONLINE
-                </p>
               </div>
             </div>
           </div>

@@ -139,10 +139,11 @@ const QueueManagement = () => {
                       <div className="flex items-center justify-end gap-2">
                         <Button 
                           onClick={() => updateStatus(item.id, "in_progress")}
+                          variant="solid"
                           disabled={item.status === "in_progress"}
-                          className="bg-[#00695c] hover:bg-[#004d40] text-white rounded-md font-bold h-9 px-4 shadow-sm transition-all active:scale-95"
+                          className="rounded-xl border-zinc-200 h-9 font-bold text-zinc-600 hover:bg-zinc-50 active:scale-95"
                         >
-                          In progress
+                          <span>In progress</span>
                         </Button>
                         <Button 
                           variant="outline"
